@@ -51,6 +51,12 @@ VALUES (
   '6th Edition',
   true,
   false
+), (
+  'Book',
+  'Ender\'s Shadow',
+  'Orson Scott Card 1999 Copyright',
+  true,
+  false
 );
 
 INSERT INTO tbl_ItemLog(
