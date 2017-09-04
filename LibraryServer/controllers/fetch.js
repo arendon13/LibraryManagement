@@ -15,15 +15,15 @@ exports.items = function(req, res, next){
   queryItems(function(err, queryResult){
     if(err) { return next(err); }
 
-    res.send({ 'ItemsResult': queryResult });
+    res.send({ 'result': queryResult });
   });
 }
 
 exports.itemLogs = function(req, res, next){
-  queryItemLog(function(err, queryResult){
+  queryItemLogs(function(err, queryResult){
     if(err) { return next(err); }
 
-    res.send({ 'ItemLogs': queryResult })
+    res.send({ 'result': queryResult })
   }, req.params.id)
 }
 
@@ -32,9 +32,23 @@ function queryItems(callback){
     callback(err, rows);
   });
 }
+function queryItem(callback, id){
+  var sql = "SELECT * FROM tbl_Item WHERE ItemID=?";
+  var inserts = [id];
+  sql = mysql.format(sql, inserts);
 
-function queryItemLog(callback, id){
-  connection.query("SELECT * FROM tbl_ItemLog WHERE ItemID=?", [id], function(err, rows){
+  connection.query(sql, function(err, rows){
+    callback(err, rows);
+  });
+}
+
+function queryItemLogs(callback, id){
+  var sql = "SELECT * FROM tbl_Item WHERE ItemID=?;SELECT * FROM tbl_ItemLog WHERE ItemID=?";
+  var inserts = [id, id];
+  sql = mysql.format(sql, inserts);
+  var options = { sql: sql, nestTables: true}
+
+  connection.query(options, function(err, rows, fields){
     callback(err, rows);
   });
 }

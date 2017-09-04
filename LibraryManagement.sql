@@ -73,6 +73,13 @@ INSERT INTO tbl_ItemLog(
   '2017-08-29 12:00:00',
   '2017-08-30 20:32:17',
   true
+), (
+  (SELECT ItemID FROM tbl_Item WHERE ItemID=1),
+  'Tim',
+  'Lee',
+  '2017-09-01 08:00:00',
+  '2017-09-02 19:14:51',
+  true
 );
 
 INSERT INTO tbl_ItemType(ItemTypeName) VALUES ('Book'),('Tablet');
