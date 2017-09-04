@@ -15,7 +15,7 @@ exports.addItem = function(req, res, next){
   addItemQuery(function(err, results){
     if(err) { return next(err); }
 
-    console.log(results);
+    res.end('The item has been added')
   }, req);
 }
 
@@ -30,7 +30,7 @@ exports.checkOut = function(req, res, next){
   checkOutQuery(function(err, results){
     if(err) { return next(err); }
 
-    console.log(results);
+    res.end('The item has been checked out');
   }, req)
 }
 
@@ -54,7 +54,6 @@ function addItemQuery(callback, req){
 function checkOutQuery(callback, req){
   var curDate = new Date();
   var datetime = dateformat(curDate, 'yyyy-mm-dd hh:MM:ss');
-  // var datetime = curDate.getFullYear() + "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes() + ":"+ curDate.getSeconds();
   var sql = "INSERT INTO tbl_ItemLog(ItemID, PersonFirstName, PersonLastName, DateBorrowed, DateReturned, hasReturned) VALUES (?,?,?,?,?,?)" +
   ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
   var inserts = [req.params.id, req.body.firstName, req.body.lastName, datetime, '', false, false, req.params.id];
