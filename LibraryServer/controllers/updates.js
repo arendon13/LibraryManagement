@@ -12,7 +12,7 @@ exports.addItem = function(req, res, next){
     return res.status(422).send({ error: 'You must provide an item type and name!' });
   }
 
-  addItemQuery(function(err, results){
+  addItemQuery(function(err){
     if(err) { return next(err); }
 
     res.end('The item has been added')
@@ -27,11 +27,19 @@ exports.checkOut = function(req, res, next){
     return res.status(422).send({ error: 'You must provide a first and last name!' })
   }
 
-  checkOutQuery(function(err, results){
+  checkOutQuery(function(err){
     if(err) { return next(err); }
 
     res.end('The item has been checked out');
   }, req)
+}
+
+exports.return = function(req, res, next){
+  returnQuery(function(err){
+    if(err) { return next(err); }
+
+    res.send('The item has been returned')
+  }, req.params.id);
 }
 
 function addItemQuery(callback, req){
@@ -41,7 +49,7 @@ function addItemQuery(callback, req){
 
   pool.getConnection(function(err, connection){
     if(!err){
-      connection.query(sql, function(err, results){
+      connection.query(sql, function(err){
         callback(err, results);
       });
       connection.release();
@@ -61,12 +69,32 @@ function checkOutQuery(callback, req){
 
   pool.getConnection(function(err, connection){
     if(!err){
-      connection.query(sql, function(err, results){
+      connection.query(sql, function(err){
         callback(err, results);
       });
       connection.release();
     } else{
       console.log('Error connecting to database...\n\n')
+    }
+  });
+}
+
+function returnQuery(callback, id){
+  var curDate = new Date();
+  var datetime = dateformat(curDate, 'yyyy-mm-dd hh:MM:ss');
+  var sql = "UPDATE tbl_ItemLog SET DateReturned=?, hasReturned=? WHERE ItemID=?"
+    + ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
+  var inserts = [datetime, true, id, true, id];
+  sql = mysql.format(sql, inserts);
+
+  pool.getConnection(function(err, connection){
+    if(!err){
+      connection.query(sql, function(err){
+        callback(err);
+      });
+      connection.release();
+    } else{
+      console.log('Error connecting to database...\n\n');
     }
   });
 }
