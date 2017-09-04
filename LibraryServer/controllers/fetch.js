@@ -43,7 +43,7 @@ function queryItem(callback, id){
 }
 
 function queryItemLogs(callback, id){
-  var sql = "SELECT * FROM tbl_Item WHERE ItemID=?;SELECT * FROM tbl_ItemLog WHERE ItemID=?";
+  var sql = "SELECT item.* FROM tbl_Item item WHERE item.ItemID=?;SELECT itemLog.* FROM tbl_ItemLog itemLog WHERE itemLog.ItemID=?";
   var inserts = [id, id];
   sql = mysql.format(sql, inserts);
   var options = { sql: sql, nestTables: true}
