@@ -40,7 +40,8 @@ CREATE TABLE tbl_User(
 );
 
 INSERT INTO tbl_Item(
-  ItemType, ItemName,
+  ItemType,
+  ItemName,
   AdditionalInfo,
   isAvailable,
   isOverdue
