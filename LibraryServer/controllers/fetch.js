@@ -3,7 +3,7 @@ const mysql = require('mysql');
 
 const pool = mysql.createPool(config.database);
 
-// TODO: Create requests for item types and specific items
+// TODO: Clean up file by reducing the amount of repeated code
 
 exports.items = function(req, res, next){
   queryItems(function(err, queryResult){
