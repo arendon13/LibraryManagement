@@ -3,11 +3,29 @@ const mysql = require('mysql');
 
 const pool = mysql.createPool(config.database);
 
+// TODO: Create requests for item types and specific items
+
 exports.items = function(req, res, next){
   queryItems(function(err, queryResult){
     if(err) { return next(err); }
 
     res.send({ 'result': queryResult });
+  });
+}
+
+exports.item = function(req, res, next){
+  queryItem(function(err, result){
+    if(err) { return next(err); }
+
+    res.send({ result: result });
+  }, req.params.id);
+}
+
+exports.itemTypes = function(req, res, next){
+  queryItemTypes(function(err, result){
+    if(err) { return next(err); }
+
+    res.send({ result: result });
   });
 }
 
@@ -46,6 +64,38 @@ function queryItemLogs(callback, id){
       connection.release();
     } else{
       console.log("Error connecting to database ... \n\n");
+    }
+  });
+}
+
+function queryItem(callback, id){
+  var sql = "SELECT * FROM tbl_Item WHERE ItemID=?";
+  var inserts = [id];
+  sql = mysql.format(sql, inserts);
+
+  pool.getConnection(function(err, connection){
+    if(!err){
+      connection.query(sql, function(err, rows){
+        callback(err, rows);
+      })
+      connection.release();
+    } else{
+      console.log("Error connecting to database...\n\n");
+    }
+  });
+}
+
+function queryItemTypes(callback){
+  var sql = "SELECT * FROM tbl_ItemType"
+
+  pool.getConnection(function(err, connection){
+    if(!err){
+      connection.query(sql, function(err, rows){
+        callback(err, rows);
+      });
+      connection.release();
+    } else{
+      console.log("Error connecting to database...\n\n");
     }
   });
 }
