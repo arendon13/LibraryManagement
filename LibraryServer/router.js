@@ -9,5 +9,6 @@ module.exports = function(app){
   app.post('/addItem', Updates.addItem);
   app.post('/checkOut/:id', Updates.checkOut);
   app.post('/return/:id', Updates.return);
-  // TODO: Create Add Item Type and Edit Item POST requests
+  app.post('/addItemType', Updates.addItemType);
+  app.post('/editItem/:id', Updates.editItem);
 }
