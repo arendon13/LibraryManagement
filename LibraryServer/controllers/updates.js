@@ -4,6 +4,8 @@ const dateformat = require('dateformat');
 
 const pool = mysql.createPool(config.database);
 
+// TODO: Clean up file by reducing the amount of repeated code
+
 exports.addItem = function(req, res, next){
   const itemType = req.body.itemType;
   const itemName = req.body.itemName;
