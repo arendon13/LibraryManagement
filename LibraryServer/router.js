@@ -1,5 +1,6 @@
 const Fetch = require('./controllers/fetch');
 const Updates = require('./controllers/updates');
+const Authentication = require('./controllers/auth');
 
 module.exports = function(app){
   app.get('/', Fetch.items);
@@ -11,4 +12,5 @@ module.exports = function(app){
   app.post('/return/:id', Updates.return);
   app.post('/addItemType', Updates.addItemType);
   app.post('/editItem/:id', Updates.editItem);
+  app.post('/signup', Authentication.signup);
 }
