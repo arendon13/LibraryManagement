@@ -10,6 +10,9 @@ function tokenForuser(email){
   return jwt.encode({ sub: email, iat: timestamp }, config.auth.secret);
 }
 
+exports.signin = function(req, res, next){
+  res.send({ token: tokenForuser(req.body.email) })
+}
 
 exports.signup = function(req, res, next){
   const email = req.body.email;
