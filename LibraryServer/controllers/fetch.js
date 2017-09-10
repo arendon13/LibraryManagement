@@ -51,6 +51,25 @@ exports.itemLogs = function(req, res, next){
   });
 }
 
+// exports.getUser = function(req, res, next){
+//   var sql = "SELECT * FROM tbl_User WHERE Email=?";
+//   var inserts = ['test3@example.com'];
+//   sql = mysql.format(sql, inserts);
+//
+//   querySQL(sql, function(err, result){
+//     if(err) { return next(err); }
+//
+//     var userinfo = result[0];
+//     var user = {
+//       email: userinfo.Email,
+//       password: userinfo.Password
+//     }
+//
+//     console.log(user);
+//     res.send({ result: result });
+//   });
+// }
+
 function querySQL(sql, callback){
   pool.getConnection(function(err, connection){
     if(!err){
