@@ -1,8 +1,6 @@
-const config = require('../config');
+const db = require('../services/database');
 const mysql = require('mysql');
 const dateformat = require('dateformat');
-
-const pool = mysql.createPool(config.database);
 
 exports.addItem = function(req, res, next){
   const itemType = req.body.itemType;
@@ -17,7 +15,7 @@ exports.addItem = function(req, res, next){
   var inserts = [itemType, itemName, additionalInfo, true, false];
   sql = mysql.format(sql, inserts);
 
-  querySQL(sql, function(err){
+  db.queryPostSQL(sql, function(err){
     if(err) { return next(err); }
 
     res.end('The item has been added')
@@ -35,7 +33,7 @@ exports.addItemType = function(req, res, next){
   var inserts = [itemType];
   sql = mysql.format(sql, inserts);
 
-  querySQL(sql, function(err){
+  db.queryPostSQL(sql, function(err){
     if(err) { return next(err); }
 
     res.end('The item type has been added');
@@ -58,7 +56,7 @@ exports.checkOut = function(req, res, next){
   var inserts = [id, firstName, lastName, datetime, '', false, false, id];
   sql = mysql.format(sql, inserts);
 
-  querySQL(sql, function(err){
+  db.queryPostSQL(sql, function(err){
     if(err) { return next(err); }
 
     res.end('The item has been checked out');
@@ -75,7 +73,7 @@ exports.return = function(req, res, next){
   var inserts = [datetime, true, id, true, id];
   sql = mysql.format(sql, inserts);
 
-  querySQL(sql, function(err){
+  db.queryPostSQL(sql, function(err){
     if(err) { return next(err); }
 
     res.send('The item has been returned')
@@ -95,22 +93,9 @@ exports.editItem = function(req, res, next){
   var inserts = [itemType, itemName, additionalInfo, req.params.id];
   sql = mysql.format(sql, inserts);
 
-  querySQL(sql, function(err){
+  db.queryPostSQL(sql, function(err){
     if(err){ return next(err); }
 
     res.end('The item has been updated');
   }, req);
-}
-
-function querySQL(sql, callback){
-  pool.getConnection(function(err, connection){
-    if(!err){
-      connection.query(sql, function(err){
-        callback(err);
-      });
-      connection.release();
-    } else{
-      console.log("Error connecting to database...\n\n")
-    }
-  });
 }

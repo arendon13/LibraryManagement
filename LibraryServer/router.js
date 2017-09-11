@@ -12,11 +12,11 @@ module.exports = function(app){
   app.get('/ItemLogs/:id', Fetch.itemLogs);
   app.get('/Item/:id', Fetch.item);
   app.get('/ItemTypes', Fetch.itemTypes);
-  app.post('/addItem', Updates.addItem);
-  app.post('/checkOut/:id', Updates.checkOut);
-  app.post('/return/:id', Updates.return);
-  app.post('/addItemType', Updates.addItemType);
-  app.post('/editItem/:id', Updates.editItem);
+  app.post('/addItem', requireAuth, Updates.addItem);
+  app.post('/checkOut/:id', requireAuth, Updates.checkOut);
+  app.post('/return/:id', requireAuth, Updates.return);
+  app.post('/addItemType', requireAuth, Updates.addItemType);
+  app.post('/editItem/:id', requireAuth, Updates.editItem);
   app.post('/signup', Authentication.signup);
   app.post('/signin', requireSignIn, Authentication.signin);
 }
