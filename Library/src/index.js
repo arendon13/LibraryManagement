@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './components/app';
 import reducers from './reducers';
 import Header from './components/header';
+import Welcome from './components/welcome';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
@@ -16,7 +17,7 @@ ReactDOM.render(
       <div>
         <Header/>
         <Switch>
-          <Route exact path="/" component={App}/>
+          <Route exact path="/" component={Welcome}/>
         </Switch>
       </div>
     </BrowserRouter>
