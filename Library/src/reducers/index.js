@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import fetchReducer from './fetch_reducer';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  fetch: fetchReducer
 });
 
 export default rootReducer;
