@@ -27,9 +27,9 @@ class Header extends Component{
 
   render(){
     return(
-      <nav className="navbar navbar-expand-lg navbar-light header">
+      <nav className="navbar navbar-toggleable-md navbar-light header">
         <Link to="/" className="navbar-brand">Library Manager</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
