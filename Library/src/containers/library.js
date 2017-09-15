@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import LibraryTable from '../components/library_table';
 import * as actions from '../actions';
 
 class Library extends Component{
@@ -8,20 +9,15 @@ class Library extends Component{
     this.props.fetchItems();
   }
 
-  renderItems(){
-    return _.map(this.props.items, item => {
-      const itemContent = `${item.ItemID}: ${item.ItemName} (${item.ItemType}) - ${item.AdditionalInfo}`
-
-      return(
-        <p key={item.ItemID}>{itemContent}</p>
-      );
-    });
-  }
-
   render(){
     return(
       <div className="container">
-        {this.renderItems()}
+        <div className="addItem">
+          <Link className="btn btn-outline-info" to="/library/addItem">Add Item</Link>
+        </div>
+        <div>
+          <LibraryTable items={this.props.items}/>
+        </div>
       </div>
     );
   }

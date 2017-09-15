@@ -14,3 +14,16 @@ export function fetchItems(){
       });
   }
 }
+
+export function fetchItemTypes(){
+  return function(dispatch){
+    let url = `${ROOT_URL}/ItemTypes`;
+    axios.get(url)
+      .then(response => {
+        dispatch({
+          type: FETCH_ITEM_TYPES,
+          payload: response.data
+        });
+      });
+  }
+}

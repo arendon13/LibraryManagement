@@ -5,3 +5,8 @@
 .body{
   background-color: #e9ecef;
 }
+
+.addItem{
+  padding-left: 20px;
+  padding-top: 20px;
+}
