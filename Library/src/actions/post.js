@@ -8,7 +8,6 @@ export function addItem(values, history){
   return function(dispatch){
     axios.post(`${ROOT_URL}/addItem`, values)
       .then(response => {
-        // dispatch({type: POST_ADD_ITEM});
         history.push('/library');
       })
       .catch(({response}) => {
