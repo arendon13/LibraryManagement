@@ -11,6 +11,7 @@ import Header from './components/header';
 import Welcome from './components/welcome';
 import Library from './containers/library';
 import AddItem from './containers/add_item';
+import AddItemTypes from './containers/add_item_types';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -20,6 +21,7 @@ ReactDOM.render(
       <div>
         <Header/>
         <Switch>
+          <Route path="/library/addItemTypes" component={AddItemTypes}/>
           <Route path="/library/addItem" component={AddItem}/>
           <Route path="/library" component={Library}/>
           <Route exact path="/" component={Welcome}/>

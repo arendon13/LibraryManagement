@@ -68,7 +68,7 @@ class AddItem extends Component{
     const { handleSubmit } = this.props;
 
     return(
-      <div className="container">
+      <div className="container container-form">
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <div className="form-group">
             <label>Type:</label>
@@ -89,7 +89,7 @@ class AddItem extends Component{
             component={this.renderField}
             type="text"/>
           {this.renderAlert()}
-          <div className="form-group"><button type="submit" className="btn btn-outline-success">Add</button></div>
+          <div className="form-group"><button type="submit" className="btn btn-outline-success">Add Item</button></div>
         </form>
       </div>
     );

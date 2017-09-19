@@ -12,8 +12,11 @@ class Library extends Component{
   render(){
     return(
       <div className="container">
-        <div className="addItem">
-          <Link className="btn btn-outline-info" to="/library/addItem">Add Item</Link>
+        <div>
+          <div className="addBtns">
+            <span className="btnSpace"><Link className="btn btn-outline-info" to="/library/addItem">Add Item</Link></span>
+            <span className="btnSpace"><Link className="btn btn-outline-info" to="/library/addItemTypes">Add Item Type</Link></span>
+          </div>
         </div>
         <div>
           <LibraryTable items={this.props.items}/>
