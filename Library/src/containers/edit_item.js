@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as fetchActions from '../actions/fetch';
+import * as postActions from '../actions/post';
 
 
 class EditItem extends Component{
@@ -51,7 +52,18 @@ class EditItem extends Component{
   }
 
   handleFormSubmit = (values) => {
-    console.log('Submit');
+    const {id} = this.props.match.params;
+    this.props.actions.postActions.editItem(values, id, this.props.history);
+  }
+
+  renderAlert(){
+    if(this.props.errorMessage){
+      return(
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
   }
 
   render(){
@@ -79,6 +91,7 @@ class EditItem extends Component{
             name="AdditionalInfo"
             component={this.renderField}
             type="text"/>
+          {this.renderAlert()}
           <div className="form-group"><button type="submit" className="btn btn-outline-success">Edit Item</button></div>
         </form>
       </div>
@@ -94,20 +107,23 @@ function validate(values){
   } else if(values.ItemName.length < 4){
     errors.ItemName = 'The name must be greater than 3 characters.';
   }
+
   return errors;
 }
 
 function mapStateToProps(state){
   return{
     initialValues: state.fetch.item,
-    itemTypes: state.fetch.itemTypes
+    itemTypes: state.fetch.itemTypes,
+    errorMessage: state.post.error
   };
 }
 
 function mapDispatchToProps(dispatch){
   return{
     actions: {
-      fetchActions: bindActionCreators(fetchActions, dispatch)
+      fetchActions: bindActionCreators(fetchActions, dispatch),
+      postActions: bindActionCreators(postActions, dispatch)
     }
   }
 }

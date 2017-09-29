@@ -32,7 +32,23 @@ export function addItemType(values, history){
         } else{
           dispatch(postError(response.data.error));
         }
+      });
+  }
+}
+
+export function editItem(values, id, history){
+  return function(dispatch){
+    axios.post(`${ROOT_URL}/editItem/${id}`, values)
+      .then(response => {
+        history.push('/library');
       })
+      .catch(({response}) => {
+        if(!response.data.error){
+          dispatch(postError(response.data));
+        } else{
+          dispatch(postError(response.data.error));
+        }
+      });
   }
 }
 
