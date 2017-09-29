@@ -21,8 +21,7 @@ class AddItem extends Component{
         <input
           className="form-control"
           id="inputHorizontalDnger"
-          type={field.type}
-          {...field.input} />
+          {...field.input}/>
         <div className="form-control-feedback">
           {touched ? error : ''}
         </div>
@@ -81,6 +80,7 @@ class AddItem extends Component{
           <Field
             label="Name:"
             name="itemName"
+            value="Test"
             component={this.renderFieldValidate}
             type="text"/>
           <Field

@@ -17,10 +17,7 @@ export default function(state = {}, action){
       return { ...state, itemTypes };
     case FETCH_ITEM:
       result = action.payload.result;
-      let item = _.mapKeys(result, function(value, key){
-        return result[key].ItemID;
-      });
-      return { ...state, item }
+      return { ...state, item: result[0] }
     default:
       return state;
   }
