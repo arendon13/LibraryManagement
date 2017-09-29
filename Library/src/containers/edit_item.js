@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import FormAlert from '../components/form_alert';
 import * as fetchActions from '../actions/fetch';
 import * as postActions from '../actions/post';
 
@@ -59,9 +60,7 @@ class EditItem extends Component{
   renderAlert(){
     if(this.props.errorMessage){
       return(
-        <div className="alert alert-danger">
-          <strong>Oops!</strong> {this.props.errorMessage}
-        </div>
+        <FormAlert errorMessage={this.props.errorMessage} />
       );
     }
   }
