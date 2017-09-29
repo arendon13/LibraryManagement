@@ -55,7 +55,6 @@ class EditItem extends Component{
   }
 
   render(){
-    console.log(this.props.item);
     const { handleSubmit } = this.props;
 
     return(

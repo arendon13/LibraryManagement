@@ -72,20 +72,19 @@ class AddItem extends Component{
           <div className="form-group">
             <label>Type:</label>
             <div>
-              <Field name="itemType" component="select">
+              <Field name="ItemType" component="select">
                 {this.itemTypeOptions()}
               </Field>
             </div>
           </div>
           <Field
             label="Name:"
-            name="itemName"
-            value="Test"
+            name="ItemName"
             component={this.renderFieldValidate}
             type="text"/>
           <Field
             label="Additional Info (Optional):"
-            name="additionalInfo"
+            name="AdditionalInfo"
             component={this.renderField}
             type="text"/>
           {this.renderAlert()}
