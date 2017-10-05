@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_ITEM, FETCH_ITEMS, FETCH_ITEM_TYPES } from './types';
+import { FETCH_ITEM, FETCH_ITEMS, FETCH_ITEM_TYPES, FETCH_ITEM_LOGS } from './types';
 
 const ROOT_URL = 'http://localhost:3030';
 
@@ -35,6 +35,19 @@ export function fetchItem(id){
       .then(response => {
         dispatch({
           type: FETCH_ITEM,
+          payload: response.data
+        });
+      });
+  }
+}
+
+export function fetchItemLogs(id){
+  return function(dispatch){
+    let url = `${ROOT_URL}/ItemLogs/${id}`;
+    axios.get(url)
+      .then(response => {
+        dispatch({
+          type: FETCH_ITEM_LOGS,
           payload: response.data
         });
       });

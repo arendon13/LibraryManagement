@@ -6,10 +6,14 @@
   background-color: #e9ecef;
 }
 
-.addBtns{
+.btns-space{
   padding-left: 20px;
   padding-top: 20px;
   padding-right: 20px;
+}
+
+.top-space{
+  padding-top: 20px;
 }
 
 .btnSpace{
@@ -29,5 +33,5 @@
 }
 
 .side-by-side{
-  display: flex;  
+  display: flex;
 }

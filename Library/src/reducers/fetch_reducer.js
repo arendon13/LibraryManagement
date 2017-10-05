@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_ITEM, FETCH_ITEMS, FETCH_ITEM_TYPES } from '../actions/types';
+import { FETCH_ITEM, FETCH_ITEMS, FETCH_ITEM_TYPES, FETCH_ITEM_LOGS } from '../actions/types';
 
 export default function(state = {}, action){
   switch (action.type) {
@@ -17,7 +17,15 @@ export default function(state = {}, action){
       return { ...state, itemTypes };
     case FETCH_ITEM:
       result = action.payload.result;
-      return { ...state, item: result[0] }
+      return { ...state, item: result[0] };
+    case FETCH_ITEM_LOGS:
+      let itemResult = action.payload.result[0][0].item;
+      let logsResult = action.payload.result[1];
+      let logs = _.mapKeys(logsResult, function(value, key){
+        return logsResult[key].itemLog.ItemLogID;
+      });
+      // console.log("In reducer:", logs);
+      return { ...state, item: itemResult, itemLogs: logs };
     default:
       return state;
   }

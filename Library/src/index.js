@@ -11,6 +11,7 @@ import Header from './components/header';
 import Welcome from './components/welcome';
 import Library from './containers/library';
 import AddItem from './containers/add_item';
+import ViewItem from './containers/view_item';
 import AddItemTypes from './containers/add_item_types';
 import EditItem from './containers/edit_item';
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <div>
         <Header/>
         <Switch>
+          <Route path="/library/itemView/:id" component={ViewItem}/>
           <Route path="/library/editItem/:id" component={EditItem}/>
           <Route path="/library/addItemTypes" component={AddItemTypes}/>
           <Route path="/library/addItem" component={AddItem}/>

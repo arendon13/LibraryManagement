@@ -13,7 +13,7 @@ class Library extends Component{
     return(
       <div className="container">
         <div>
-          <div className="addBtns">
+          <div className="btns-space">
             <span className="btnSpace"><Link className="btn btn-outline-info" to="/library/addItem">Add Item</Link></span>
             <span className="btnSpace"><Link className="btn btn-outline-info" to="/library/addItemTypes">Add Item Type</Link></span>
           </div>
