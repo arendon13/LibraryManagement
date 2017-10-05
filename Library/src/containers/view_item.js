@@ -11,6 +11,7 @@ class ViewItem extends Component{
   }
 
   render(){
+    // TODO: Take into account when the item is already checked out and button should not be present
     if(!this.props.item) { return <div>Loading...</div>}
     return(
       <div className="container">
@@ -19,7 +20,6 @@ class ViewItem extends Component{
             Item Name: <strong>{this.props.item.ItemName}</strong>
         </p>
         <div className="btns-space">
-          {// TODO: Take into account when the item is already checked out and button should not be present}
           <span className="btnSpace"><Link className="btn btn-outline-info" to="/library">Back to Library</Link></span>
           <span className="btnSpace"><Link className="btn btn-outline-warning" to={`/library/checkOut/${this.props.item.ItemID}`}>Check Out</Link></span>
         </div>
