@@ -17,6 +17,7 @@ import EditItem from './containers/edit_item';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
+// TODO: Add route for item check out
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>

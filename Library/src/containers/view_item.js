@@ -1,17 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ItemLogsTable from '../components/item_logs_table';
-import * as actions from '../actions/fetch';
+import { bindActionCreators } from 'redux';
+// import ItemLogsTable from '../components/item_logs_table';
+import * as fetchActions from '../actions/fetch';
+import * as postActions from '../actions/post';
 
 class ViewItem extends Component{
   componentWillMount(){
     const {id} = this.props.match.params;
-    this.props.fetchItemLogs(id);
+    this.props.actions.fetchActions.fetchItemLogs(id);
+  }
+
+  renderBtns(){
+    if(this.props.item.isAvailable){
+      return(
+        <div>
+          <span className="btnSpace"><Link className="btn btn-outline-info" to="/library">Back to Library</Link></span>
+          <span className="btnSpace"><Link className="btn btn-outline-warning" to={`/library/checkOut/${this.props.item.ItemID}`}>Check Out</Link></span>
+        </div>
+      );
+    } else{
+      return(
+        <div>
+          <span className="btnSpace"><Link className="btn btn-outline-info" to="/library">Back to Library</Link></span>
+        </div>
+      );
+    }
+  }
+
+  renderLogs(logs){
+    if(_.isEmpty(logs)){
+      return(
+        <tr>
+          <td colSpan="3">No Logs are available for this item yet. Lets hope this item gets checked out soon!</td>
+        </tr>
+      );
+    } else{
+      return _.map(logs, log => {
+        if(!log.itemLog.DateReturned){
+          return(
+            <tr key={log.itemLog.ItemLogID}>
+              <td>{log.itemLog.PersonFirstName} {log.itemLog.PersonLastName}</td>
+              <td>{log.itemLog.DateBorrowed}</td>
+              <td><button className="btn btn-outline-success" onClick={event => this.onReturnClick()}>Return</button></td>
+            </tr>
+          );
+        } else{
+          return(
+            <tr key={log.itemLog.ItemLogID}>
+              <td>{log.itemLog.PersonFirstName} {log.itemLog.PersonLastName}</td>
+              <td>{log.itemLog.DateBorrowed}</td>
+              <td>{log.itemLog.DateReturned}</td>
+            </tr>
+          );
+        }
+      });
+    }
+  }
+
+  onReturnClick(){
+    const {id} = this.props.match.params;
+    console.log("Returning Item!", id);
+    this.props.actions.postActions.returnItem(id, this.props.history);
   }
 
   render(){
-    // TODO: Take into account when the item is already checked out and button should not be present
     if(!this.props.item) { return <div>Loading...</div>}
     return(
       <div className="container">
@@ -20,11 +74,21 @@ class ViewItem extends Component{
             Item Name: <strong>{this.props.item.ItemName}</strong>
         </p>
         <div className="btns-space">
-          <span className="btnSpace"><Link className="btn btn-outline-info" to="/library">Back to Library</Link></span>
-          <span className="btnSpace"><Link className="btn btn-outline-warning" to={`/library/checkOut/${this.props.item.ItemID}`}>Check Out</Link></span>
+          {this.renderBtns()}
         </div>
         <div>
-          <ItemLogsTable logs={this.props.itemLogs}/>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date Borrowed</th>
+                <th>Date Returned</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderLogs(this.props.itemLogs)}
+            </tbody>
+          </table>
         </div>
       </div>
     );
@@ -38,4 +102,13 @@ function mapStateToProps(state){
   };
 }
 
-export default connect(mapStateToProps, actions)(ViewItem);
+function mapDispatchToProps(dispatch){
+  return{
+    actions: {
+      fetchActions: bindActionCreators(fetchActions, dispatch),
+      postActions: bindActionCreators(postActions, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewItem);

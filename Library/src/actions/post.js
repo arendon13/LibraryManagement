@@ -52,6 +52,23 @@ export function editItem(values, id, history){
   }
 }
 
+export function returnItem(id, history){
+  return function(dispatch){
+    let url = `${ROOT_URL}/return/${id}`;
+    axios.post(url)
+      .then(response => {
+        history.push('/library');
+      })
+      .catch(({response}) => {
+        if(!response.data.error){
+          dispatch(postError(response.data));
+        } else{
+          dispatch(postError(response.data.error));
+        }
+      });
+  }
+}
+
 export function postError(error){
   return{
     type: POST_ERROR,
