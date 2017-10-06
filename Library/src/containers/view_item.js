@@ -61,7 +61,6 @@ class ViewItem extends Component{
 
   onReturnClick(){
     const {id} = this.props.match.params;
-    console.log("Returning Item!", id);
     this.props.actions.postActions.returnItem(id, this.props.history);
   }
 
