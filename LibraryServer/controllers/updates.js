@@ -41,8 +41,8 @@ exports.addItemType = function(req, res, next){
 }
 
 exports.checkOut = function(req, res, next){
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+  const firstName = req.body.PersonFirstName;
+  const lastName = req.body.PersonLastName;
   const id = req.params.id;
 
   if(!firstName || !lastName){

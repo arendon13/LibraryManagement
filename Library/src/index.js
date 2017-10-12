@@ -12,18 +12,19 @@ import Welcome from './components/welcome';
 import Library from './containers/library';
 import AddItem from './containers/add_item';
 import ViewItem from './containers/view_item';
+import CheckOut from './containers/check_out';
 import AddItemTypes from './containers/add_item_types';
 import EditItem from './containers/edit_item';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
-// TODO: Add route for item check out
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
         <Header/>
         <Switch>
+          <Route path="/library/checkOut/:id" component={CheckOut}/>
           <Route path="/library/itemView/:id" component={ViewItem}/>
           <Route path="/library/editItem/:id" component={EditItem}/>
           <Route path="/library/addItemTypes" component={AddItemTypes}/>
