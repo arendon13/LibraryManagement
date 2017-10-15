@@ -1,0 +1,37 @@
+.header{
+  background-color: #e3f2fd;
+}
+
+.body{
+  background-color: #e9ecef;
+}
+
+.btns-space{
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+.top-space{
+  padding-top: 20px;
+}
+
+.btnSpace{
+  padding-right: 20px;
+}
+
+.left-div {
+    width: 25%
+}
+.right-div {
+    flex-grow: 1;
+}
+
+.container-form{
+  background-color: floralwhite;
+  padding: 25px;
+}
+
+.side-by-side{
+  display: flex;
+}

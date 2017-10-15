@@ -3,16 +3,16 @@ const mysql = require('mysql');
 const dateformat = require('dateformat');
 
 exports.addItem = function(req, res, next){
-  const itemType = req.body.itemType;
-  const itemName = req.body.itemName;
-  const additionalInfo = req.body.additionalInfo;
+  const ItemType = req.body.ItemType;
+  const ItemName = req.body.ItemName;
+  const AdditionalInfo = req.body.AdditionalInfo;
 
-  if(!itemType || !itemName){
+  if(!ItemType || !ItemName){
     return res.status(422).send({ error: 'You must provide an item type and name!' });
   }
 
   var sql = "INSERT INTO tbl_Item(ItemType, ItemName, AdditionalInfo, isAvailable, isOverdue) VALUES (?,?,?,?,?) ";
-  var inserts = [itemType, itemName, additionalInfo, true, false];
+  var inserts = [ItemType, ItemName, AdditionalInfo, true, false];
   sql = mysql.format(sql, inserts);
 
   db.queryPostSQL(sql, function(err){
@@ -23,14 +23,14 @@ exports.addItem = function(req, res, next){
 }
 
 exports.addItemType = function(req, res, next){
-  const itemType = req.body.itemType;
+  const ItemType = req.body.ItemType;
 
-  if(!itemType){
+  if(!ItemType){
     return res.status(422).send({ error: 'You must provide an item type!' });
   }
 
   var sql = "INSERT INTO tbl_ItemType(ItemTypeName) VALUES (?)";
-  var inserts = [itemType];
+  var inserts = [ItemType];
   sql = mysql.format(sql, inserts);
 
   db.queryPostSQL(sql, function(err){
@@ -41,8 +41,8 @@ exports.addItemType = function(req, res, next){
 }
 
 exports.checkOut = function(req, res, next){
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
+  const firstName = req.body.PersonFirstName;
+  const lastName = req.body.PersonLastName;
   const id = req.params.id;
 
   if(!firstName || !lastName){
@@ -81,16 +81,16 @@ exports.return = function(req, res, next){
 }
 
 exports.editItem = function(req, res, next){
-  const itemType = req.body.itemType;
-  const itemName = req.body.itemName;
-  const additionalInfo = req.body.additionalInfo;
+  const ItemType = req.body.ItemType;
+  const ItemName = req.body.ItemName;
+  const AdditionalInfo = req.body.AdditionalInfo;
 
-  if(!itemType || !itemName){
+  if(!ItemType || !ItemName){
     return res.status(422).send({ error: 'The item name and type cannot be blank!' });
   }
 
   var sql = "UPDATE tbl_Item SET ItemType=?, ItemName=?, AdditionalInfo=? WHERE ItemID=?"
-  var inserts = [itemType, itemName, additionalInfo, req.params.id];
+  var inserts = [ItemType, ItemName, AdditionalInfo, req.params.id];
   sql = mysql.format(sql, inserts);
 
   db.queryPostSQL(sql, function(err){
