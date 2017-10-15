@@ -18,13 +18,20 @@ import EditItem from './containers/edit_item';
 import SignOut from './components/auth/signout';
 import SignIn from './components/auth/signin';
 import requireAuth from './components/hoc/require_authentication';
+import { AUTH_USER } from './actions/types';
 
 // TODO: Edit index.js so it can use the HOC and keep track of a token
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
+const token = localStorage.getItem('token'); // If we have a token, consider the user signed in
+if(token){
+  store.dispatch({ type: AUTH_USER });
+}
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <BrowserRouter>
       <div>
         <Header/>
