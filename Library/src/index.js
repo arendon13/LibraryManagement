@@ -15,9 +15,8 @@ import ViewItem from './containers/view_item';
 import CheckOut from './containers/check_out';
 import AddItemTypes from './containers/add_item_types';
 import EditItem from './containers/edit_item';
+import SignIn from './components/auth/signin';
 
-// TODO: Make a Sign In component; wire it up using actions.
-// TODO: Add new reducer for signing in
 // TODO: Make Signout component
 // TODO: Add A HOC for FE sign in validation
 // TODO: Edit index.js so it can use the HOC and keep track of a token
@@ -36,6 +35,7 @@ ReactDOM.render(
           <Route path="/library/addItemTypes" component={AddItemTypes}/>
           <Route path="/library/addItem" component={AddItem}/>
           <Route path="/library" component={Library}/>
+          <Route path="/signin" component={SignIn}/>
           <Route exact path="/" component={Welcome}/>
         </Switch>
       </div>

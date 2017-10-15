@@ -45,7 +45,7 @@ class Header extends Component{
 
 function mapStateToProps(state){
   return{
-    authenticated: false // TODO: Replace when authReducer is implemented
+    authenticated: state.auth.authenticated
   }
 }
 
