@@ -17,9 +17,8 @@ import AddItemTypes from './containers/add_item_types';
 import EditItem from './containers/edit_item';
 import SignOut from './components/auth/signout';
 import SignIn from './components/auth/signin';
+import requireAuth from './components/hoc/require_authentication';
 
-// TODO: Make Signout component
-// TODO: Add A HOC for FE sign in validation
 // TODO: Edit index.js so it can use the HOC and keep track of a token
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -30,11 +29,11 @@ ReactDOM.render(
       <div>
         <Header/>
         <Switch>
-          <Route path="/library/checkOut/:id" component={CheckOut}/>
-          <Route path="/library/itemView/:id" component={ViewItem}/>
-          <Route path="/library/editItem/:id" component={EditItem}/>
-          <Route path="/library/addItemTypes" component={AddItemTypes}/>
-          <Route path="/library/addItem" component={AddItem}/>
+          <Route path="/library/checkOut/:id" component={requireAuth(CheckOut)}/>
+          <Route path="/library/itemView/:id" component={requireAuth(ViewItem)}/>
+          <Route path="/library/editItem/:id" component={requireAuth(EditItem)}/>
+          <Route path="/library/addItemTypes" component={requireAuth(AddItemTypes)}/>
+          <Route path="/library/addItem" component={requireAuth(AddItem)}/>
           <Route path="/library" component={Library}/>
           <Route path="/signout" component={SignOut}/>
           <Route path="/signin" component={SignIn}/>
