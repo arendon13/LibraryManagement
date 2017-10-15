@@ -15,6 +15,7 @@ import ViewItem from './containers/view_item';
 import CheckOut from './containers/check_out';
 import AddItemTypes from './containers/add_item_types';
 import EditItem from './containers/edit_item';
+import SignOut from './components/auth/signout';
 import SignIn from './components/auth/signin';
 
 // TODO: Make Signout component
@@ -35,6 +36,7 @@ ReactDOM.render(
           <Route path="/library/addItemTypes" component={AddItemTypes}/>
           <Route path="/library/addItem" component={AddItem}/>
           <Route path="/library" component={Library}/>
+          <Route path="/signout" component={SignOut}/>
           <Route path="/signin" component={SignIn}/>
           <Route exact path="/" component={Welcome}/>
         </Switch>

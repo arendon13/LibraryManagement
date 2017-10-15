@@ -12,9 +12,21 @@ export function signin(values, history){
         history.push('/library');
       })
       .catch(({response}) => {
-        dispatch(authError(response.data.error));
+        if(!response.data.error){
+          dispatch(authError(response.data));
+        } else{
+          dispatch(authError(response.data.error));
+        }
       });
   }
+}
+
+export function signout(){
+  localStorage.removeItem('token');
+
+  return{
+    type: UNAUTH_USER
+  };
 }
 
 export function authError(error){
