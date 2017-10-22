@@ -45,6 +45,13 @@ exports.itemLogs = function(req, res, next){
   db.queryGetSQL(options, function(err, queryResult){
     if(err) { return next(err); }
 
-    res.send({ 'result': queryResult })
+    console.log(queryResult[0][0].item);
+    let lastEntryIndex = queryResult[1].length - 1;
+    let lastEntry = queryResult[1][lastEntryIndex];
+    if(lastEntry){
+      console.log(lastEntry.itemLog);
+    }
+
+    res.send({ 'result': queryResult });
   });
 }

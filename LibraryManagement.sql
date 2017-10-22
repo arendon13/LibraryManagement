@@ -20,6 +20,7 @@ CREATE TABLE tbl_ItemLog(
   PersonFirstName   VARCHAR(255),
   PersonLastName    VARCHAR(255),
   DateBorrowed      VARCHAR(255),
+  DueBackBy         VARCHAR(255),
   DateReturned      VARCHAR(255),
   hasReturned       BOOLEAN,
   FOREIGN KEY (ItemID)
