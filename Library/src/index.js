@@ -20,8 +20,6 @@ import SignIn from './components/auth/signin';
 import requireAuth from './components/hoc/require_authentication';
 import { AUTH_USER } from './actions/types';
 
-// TODO: Edit index.js so it can use the HOC and keep track of a token
-
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 

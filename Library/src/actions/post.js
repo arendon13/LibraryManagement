@@ -79,7 +79,7 @@ export function checkOut(values, id, history){
 export function returnItem(id, history){
   return function(dispatch){
     let url = `${ROOT_URL}/return/${id}`;
-    axios.post(url, {
+    axios.post(url, {}, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
