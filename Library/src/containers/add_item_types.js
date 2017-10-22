@@ -48,6 +48,7 @@ class AddItemType extends Component{
   }
 
   render(){
+    console.log('Add Item Type', localStorage.getItem('token'));
     const {handleSubmit} = this.props;
     return(
       <div className="container container-form side-by-side">
@@ -56,7 +57,7 @@ class AddItemType extends Component{
           <form onSubmit={handleSubmit(this.handleFormSubmit)}>
             <Field
               label="Item Type Name:"
-              name="itemType"
+              name="ItemType"
               component={this.renderField}
               type="text"/>
             {this.renderAlert()}
