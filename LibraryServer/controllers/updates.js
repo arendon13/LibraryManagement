@@ -50,7 +50,7 @@ exports.checkOut = function(req, res, next){
   }
 
   var curDate = new Date();
-  var datetime = dateformat(curDate, 'yyyy-mm-dd hh:MM:ss');
+  var datetime = dateformat(curDate, 'yyyy-mm-dd');
   var sql = "INSERT INTO tbl_ItemLog(ItemID, PersonFirstName, PersonLastName, DateBorrowed, DateReturned, hasReturned) VALUES (?,?,?,?,?,?)" +
   ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
   var inserts = [id, firstName, lastName, datetime, '', false, false, id];
@@ -67,7 +67,7 @@ exports.return = function(req, res, next){
   const id = req.params.id;
 
   var curDate = new Date();
-  var datetime = dateformat(curDate, 'yyyy-mm-dd hh:MM:ss');
+  var datetime = dateformat(curDate, 'yyyy-mm-dd');
   var sql = "UPDATE tbl_ItemLog SET DateReturned=?, hasReturned=? WHERE ItemID=?"
     + ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
   var inserts = [datetime, true, id, true, id];

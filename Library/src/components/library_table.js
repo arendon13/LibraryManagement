@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function renderItems(items){
   return _.map(items, item => {
     const isAvailable = item.isAvailable === 1 ? 'Yes' : 'No';
+    const availability = getAvailabilityStyle(item);
 
     return(
       <tr key={item.ItemID}>
@@ -12,7 +13,7 @@ function renderItems(items){
         <td>{item.ItemType}</td>
         <td>{item.ItemName}</td>
         <td>{item.AdditionalInfo}</td>
-        <td>{isAvailable}</td>
+        <td className={availability}>{isAvailable}</td>
         <td>
           <div className="btn-group" role="group" aria-label="Operations">
             <Link className="btn btn-outline-primary" to={`/library/itemView/${item.ItemID}`}>View</Link>
@@ -22,6 +23,16 @@ function renderItems(items){
       </tr>
     );
   });
+}
+
+function getAvailabilityStyle(item){
+  if(item.isAvailable === 1){
+    return 'center-availability available';
+  } else if(item.isOverdue === 0){
+      return 'center-availability not-overdue';
+  } else{
+    return 'center-availability overdue';
+  }
 }
 
 const LibraryTable = ({items}) => {

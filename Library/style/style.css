@@ -35,3 +35,19 @@
 .side-by-side{
   display: flex;
 }
+
+.center-availability{
+  text-align: center;
+}
+
+.available{
+  background-color: #E9FEE2;
+}
+
+.overdue{
+  background-color: #FFE5E3;
+}
+
+.not-overdue{
+  background-color: #FFFFE3;
+}

@@ -64,13 +64,24 @@ class ViewItem extends Component{
     this.props.actions.postActions.returnItem(id, this.props.history);
   }
 
+  getStatus(){
+    if(this.props.item.isAvailable === 1){
+      return 'Available';
+    } else if(this.props.item.isOverdue === 0){
+      return 'Checked Out';
+    } else{
+      return 'Overdue!';
+    }
+  }
+
   render(){
     if(!this.props.item) { return <div>Loading...</div>}
     return(
       <div className="container">
         <p className="top-space">
             Item ID: <strong>{this.props.item.ItemID}</strong><br/>
-            Item Name: <strong>{this.props.item.ItemName}</strong>
+            Item Name: <strong>{this.props.item.ItemName}</strong><br/>
+            Item Status: <strong>{this.getStatus()}</strong>
         </p>
         <div className="btns-space">
           {this.renderBtns()}

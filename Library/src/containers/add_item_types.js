@@ -48,6 +48,7 @@ class AddItemType extends Component{
   }
 
   render(){
+    console.log('Add Item Type', localStorage.getItem('token'));
     const {handleSubmit} = this.props;
     return(
       <div className="container container-form side-by-side">
