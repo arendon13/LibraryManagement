@@ -5,7 +5,9 @@ const ROOT_URL = 'http://localhost:3030';
 
 export function addItem(values, history){
   return function(dispatch){
-    axios.post(`${ROOT_URL}/addItem`, values)
+    axios.post(`${ROOT_URL}/addItem`, values, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         history.push('/library');
       })
@@ -22,7 +24,9 @@ export function addItem(values, history){
 
 export function addItemType(values, history){
   return function(dispatch){
-    axios.post(`${ROOT_URL}/addItemType`, values)
+    axios.post(`${ROOT_URL}/addItemType`, values, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         history.push('/library');
       })
@@ -38,7 +42,9 @@ export function addItemType(values, history){
 
 export function editItem(values, id, history){
   return function(dispatch){
-    axios.post(`${ROOT_URL}/editItem/${id}`, values)
+    axios.post(`${ROOT_URL}/editItem/${id}`, values, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         history.push('/library');
       })
@@ -54,7 +60,9 @@ export function editItem(values, id, history){
 
 export function checkOut(values, id, history){
   return function(dispatch){
-    axios.post(`${ROOT_URL}/checkOut/${id}`, values)
+    axios.post(`${ROOT_URL}/checkOut/${id}`, values, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         history.push('/library');
       })
@@ -71,7 +79,9 @@ export function checkOut(values, id, history){
 export function returnItem(id, history){
   return function(dispatch){
     let url = `${ROOT_URL}/return/${id}`;
-    axios.post(url)
+    axios.post(url, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         history.push('/library');
       })

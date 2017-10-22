@@ -57,7 +57,7 @@ class AddItemType extends Component{
           <form onSubmit={handleSubmit(this.handleFormSubmit)}>
             <Field
               label="Item Type Name:"
-              name="itemType"
+              name="ItemType"
               component={this.renderField}
               type="text"/>
             {this.renderAlert()}
