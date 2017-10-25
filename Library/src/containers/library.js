@@ -10,7 +10,6 @@ class Library extends Component{
   }
 
   render(){
-    console.log(localStorage.getItem('token'));
     return(
       <div className="container">
         <div>

@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import FormAlert from '../components/form_alert';
+import renderDatePicker from '../components/render_date_picker';
 import * as actions from '../actions/post';
 
+// import '../../node_modules/react-datepicker/dist/react-datepicker.css';
+
 class CheckOut extends Component{
+  constructor (props) {
+    super(props)
+    this.state = {
+      startDate: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
   renderFieldValidate(field){
     const { meta: {touched, error}} = field;
     const className = `form-group ${touched && error ? 'has-danger' : ''}`;
@@ -33,9 +52,9 @@ class CheckOut extends Component{
   }
 
   handleFormSubmit = (values) => {
-    console.log("Checking the item out!");
     const {id} = this.props.match.params;
     this.props.checkOut(values, id, this.props.history);
+    // console.log(values);
   }
 
   render(){
@@ -46,6 +65,9 @@ class CheckOut extends Component{
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <Field label="First Name:" name="PersonFirstName" component={this.renderFieldValidate} type="text"/>
           <Field label="Last Name:" name="PersonLastName" component={this.renderFieldValidate} type="text"/>
+          <div className="form-group">
+            <label className="form-control-label">Due Back By (Optional):</label><Field name="DueBackBy" component={renderDatePicker}/>
+          </div>
           {this.renderAlert()}
           <div className="form-group"><button type="submit" className="btn btn-outline-success">Check Out</button></div>
         </form>

@@ -20,6 +20,7 @@ CREATE TABLE tbl_ItemLog(
   PersonFirstName   VARCHAR(255),
   PersonLastName    VARCHAR(255),
   DateBorrowed      VARCHAR(255),
+  DueBackBy         VARCHAR(255),
   DateReturned      VARCHAR(255),
   hasReturned       BOOLEAN,
   FOREIGN KEY (ItemID)
@@ -56,7 +57,13 @@ VALUES (
   'Book',
   'Ender\'s Shadow',
   'Orson Scott Card 1999 Copyright',
-  true,
+  false,
+  true
+), (
+  'Tablet',
+  'Pixel C',
+  'Serial Num: 23wSefMa23nKaiOWe2',
+  false,
   false
 );
 
@@ -65,22 +72,41 @@ INSERT INTO tbl_ItemLog(
   PersonFirstName,
   PersonLastName,
   DateBorrowed,
+  DueBackBy,
   DateReturned,
   hasReturned
 ) VALUES(
   (SELECT ItemID FROM tbl_Item WHERE ItemID=1),
   'Adrian',
   'Rendon',
-  '2017-08-29 12:00:00',
-  '2017-08-30 20:32:17',
+  '08/29/2017',
+  '',
+  '08/30/2017',
   true
 ), (
   (SELECT ItemID FROM tbl_Item WHERE ItemID=1),
   'Tim',
   'Lee',
-  '2017-09-01 08:00:00',
-  '2017-09-02 19:14:51',
+  '09/01/2017',
+  '',
+  '09/02/2017',
   true
+), (
+  (SELECT ItemID FROM tbl_Item WHERE ItemID=2),
+  'Tim',
+  'Lee',
+  '10/17/2017',
+  '10/24/2017',
+  '',
+  false
+), (
+  (SELECT ItemID FROM tbl_Item WHERE ItemID=3),
+  'Tim',
+  'Lee',
+  '10/17/2017',
+  '',
+  '',
+  false
 );
 
 INSERT INTO tbl_ItemType(ItemTypeName) VALUES ('Book'),('Tablet');
