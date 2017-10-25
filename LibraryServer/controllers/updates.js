@@ -55,7 +55,7 @@ exports.checkOut = function(req, res, next){
   }
 
   var curDate = new Date();
-  var datetime = dateformat(curDate, 'mm-dd-yyyy');
+  var datetime = dateformat(curDate, 'mm/dd/yyyy');
   var sql = "INSERT INTO tbl_ItemLog(ItemID, PersonFirstName, PersonLastName, DateBorrowed, DueBackBy, DateReturned, hasReturned) VALUES (?,?,?,?,?,?,?)" +
   ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
   var inserts = [id, firstName, lastName, datetime, dueDate, '', false, false, id];
@@ -72,7 +72,7 @@ exports.return = function(req, res, next){
   const id = req.params.id;
 
   var curDate = new Date();
-  var datetime = dateformat(curDate, 'yyyy-mm-dd');
+  var datetime = dateformat(curDate, 'mm/dd/yyyy');
   var sql = "UPDATE tbl_ItemLog SET DateReturned=?, hasReturned=? WHERE ItemID=?"
     + ";UPDATE tbl_Item SET isAvailable=? WHERE ItemID=?";
   var inserts = [datetime, true, id, true, id];
@@ -103,4 +103,15 @@ exports.editItem = function(req, res, next){
 
     res.end('The item has been updated');
   }, req);
+}
+
+exports.MarkOverdue = function(id){
+  var sql = "UPDATE tbl_Item SET isOverdue=? WHERE ItemID=?"
+  var inserts = [1, id];
+  sql = mysql.format(sql, inserts);
+
+  db.queryPostSQL(sql, function(err){
+    if(err){ return err; }
+    // console.log('The item has been marked as overdue');
+  })
 }

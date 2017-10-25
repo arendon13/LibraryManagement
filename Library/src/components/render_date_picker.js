@@ -43,6 +43,7 @@ class renderDatePicker extends React.Component {
           dateFormat="MM/DD/YYYY"
           selected={input.value ? moment(input.value, 'MM/DD/YYYY') : null}
           onChange={this.handleChange}
+          minDate={moment()}
         />
         {touched && error && <span>{error}</span>}
       </div>
