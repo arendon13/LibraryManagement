@@ -53,8 +53,8 @@ class CheckOut extends Component{
 
   handleFormSubmit = (values) => {
     const {id} = this.props.match.params;
-    // this.props.checkOut(values, id, this.props.history);
-    console.log(values);
+    this.props.checkOut(values, id, this.props.history);
+    // console.log(values);
   }
 
   render(){
@@ -66,9 +66,7 @@ class CheckOut extends Component{
           <Field label="First Name:" name="PersonFirstName" component={this.renderFieldValidate} type="text"/>
           <Field label="Last Name:" name="PersonLastName" component={this.renderFieldValidate} type="text"/>
           <div className="form-group">
-            <label className="form-control-label">Due Back By (Optional):</label>
-            {/* <DatePicker className="form-control" name="DueBackBy" selected={this.state.startDate} onChange={this.handleChange} minDate={moment()}/> */}
-            <Field name="DueBackBy" component={renderDatePicker}/>
+            <label className="form-control-label">Due Back By (Optional):</label><Field name="DueBackBy" component={renderDatePicker}/>
           </div>
           {this.renderAlert()}
           <div className="form-group"><button type="submit" className="btn btn-outline-success">Check Out</button></div>

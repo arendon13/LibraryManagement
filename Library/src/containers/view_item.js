@@ -33,16 +33,19 @@ class ViewItem extends Component{
     if(_.isEmpty(logs)){
       return(
         <tr>
-          <td colSpan="3">No Logs are available for this item yet. Lets hope this item gets checked out soon!</td>
+          <td colSpan="4">No Logs are available for this item yet. Lets hope this item gets checked out soon!</td>
         </tr>
       );
     } else{
       return _.map(logs, log => {
+        let dueDate = this.getDueDate(log);
+
         if(!log.itemLog.DateReturned){
           return(
             <tr key={log.itemLog.ItemLogID}>
               <td>{log.itemLog.PersonFirstName} {log.itemLog.PersonLastName}</td>
               <td>{log.itemLog.DateBorrowed}</td>
+              <td>{dueDate}</td>
               <td><button className="btn btn-outline-success" onClick={event => this.onReturnClick()}>Return</button></td>
             </tr>
           );
@@ -51,11 +54,20 @@ class ViewItem extends Component{
             <tr key={log.itemLog.ItemLogID}>
               <td>{log.itemLog.PersonFirstName} {log.itemLog.PersonLastName}</td>
               <td>{log.itemLog.DateBorrowed}</td>
+              <td>{dueDate}</td>
               <td>{log.itemLog.DateReturned}</td>
             </tr>
           );
         }
       });
+    }
+  }
+
+  getDueDate(log){
+    if(log.itemLog.DueBackBy === ''){
+      return 'N/A';
+    } else {
+      return log.itemLog.DueBackBy;
     }
   }
 
@@ -92,6 +104,7 @@ class ViewItem extends Component{
               <tr>
                 <th>Name</th>
                 <th>Date Borrowed</th>
+                <th>Due Back By</th>
                 <th>Date Returned</th>
               </tr>
             </thead>
