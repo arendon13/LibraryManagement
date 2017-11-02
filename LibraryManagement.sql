@@ -77,32 +77,32 @@ INSERT INTO tbl_ItemLog(
   hasReturned
 ) VALUES(
   (SELECT ItemID FROM tbl_Item WHERE ItemID=1),
-  'Adrian',
-  'Rendon',
+  'John',
+  'WebMaster',
   '08/29/2017',
   '',
   '08/30/2017',
   true
 ), (
   (SELECT ItemID FROM tbl_Item WHERE ItemID=1),
-  'Tim',
-  'Lee',
+  'Joe',
+  'Eastwood',
   '09/01/2017',
   '',
   '09/02/2017',
   true
 ), (
   (SELECT ItemID FROM tbl_Item WHERE ItemID=2),
-  'Tim',
-  'Lee',
+  'Joe',
+  'Eastwood',
   '10/17/2017',
   '10/24/2017',
   '',
   false
 ), (
   (SELECT ItemID FROM tbl_Item WHERE ItemID=3),
-  'Tim',
-  'Lee',
+  'Joe',
+  'Eastwood',
   '10/17/2017',
   '',
   '',
