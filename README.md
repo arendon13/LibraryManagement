@@ -27,7 +27,7 @@ the items are returned.
 ## How To Run
 
 ### Clone the repo
-Checkout this repo, install dependencies, then start the gulp process with the following:
+Checkout this repo and install the dependencies
 
 ```
 > git clone https://github.com/arendon13/LibraryManagement.git
